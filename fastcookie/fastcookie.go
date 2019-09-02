@@ -229,7 +229,17 @@ func (fc *FastCookie) set6(name, lowcaename []byte, value []byte) {
 		}
 	case "doma":
 		if string(lowcaename[2:6]) == "main" {
-			fc.domain = append(fc.domain[:0], value...)
+			// 	If the first character of the attribute-value string is %x2E ("."):
+			// 	Let cookie-domain be the attribute-value without the leading %x2E
+			// 	(".") character.
+			//  Otherwise:
+			// 	Let cookie-domain be the entire attribute-value.
+			if len(value) > 0 && value[0] == '.' {
+				fc.domain = append(fc.domain[:0], value[1:]...)
+			} else {
+				fc.domain = append(fc.domain[:0], value...)
+			}
+			toLowercsaeASCII(fc.domain)
 			return
 		}
 	}

@@ -7,7 +7,7 @@ import (
 )
 
 func TestWantCookie(t *testing.T) {
-	c := []byte(`cookie-9=i3e01nf61b6t23bvfmplnanol3; Path=/restricted/; Domain=example.com; Expires=Tue, 10 Nov 2009 23:00:00 GMT; Max-Age=3600`)
+	c := []byte(`cookie-9=i3e01nf61b6t23bvfmplnanol3; Path=/restricted/; Domain=exAmple.com; Expires=Tue, 10 Nov 2009 23:00:00 GMT; Max-Age=3600`)
 
 	var fc FastCookie
 	ParseCookie(&fc, [][]byte{c})
