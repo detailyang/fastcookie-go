@@ -39,6 +39,10 @@ type FastCookie struct {
 	samesite    []byte
 }
 
+func (fc *FastCookie) Parse(c [][]byte) {
+	ParseCookie(fc, c)
+}
+
 func (fc *FastCookie) GetExpires() time.Time {
 	return fc.expires
 }
