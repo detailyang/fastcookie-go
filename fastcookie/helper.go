@@ -2,19 +2,25 @@ package fastcookie
 
 import "unsafe"
 
+// decodeCookieArg decodes cookie argument
+//
+// The original implementation is from fasthttp
 func decodeCookieArg(dst, src []byte, skipQuotes bool) []byte {
 	for len(src) > 0 && src[0] == ' ' {
 		src = src[1:]
 	}
+
 	for len(src) > 0 && src[len(src)-1] == ' ' {
 		src = src[:len(src)-1]
 	}
+
 	if skipQuotes {
 		if len(src) > 1 && src[0] == '"' && src[len(src)-1] == '"' {
 			src = src[1 : len(src)-1]
 		}
 	}
-	return append(dst[:0], src...)
+
+	return append(dst, src...)
 }
 
 func toLowercsaeASCII(b []byte) {
